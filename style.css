@@ -526,6 +526,9 @@ h3 {
   padding: 0 1rem;
   color: var(--text-muted);
   font-size: 0.84rem;
+  text-align: center;
+  display: grid;
+  gap: 0.18rem;
 }
 
 .is-hidden {

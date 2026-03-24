@@ -29,7 +29,6 @@
         <header class="topbar panel panel-highlight">
           <div class="topbar-row">
             <div class="header-copy">
-              <p class="section-kicker">Versjon 1.0.0</p>
               <h1>eSIM QR-dekoder</h1>
               <p class="header-subtitle">Dekoder eSIM QR-koder lokalt i nettleseren, uten opplasting eller lagring.</p>
             </div>
@@ -116,6 +115,7 @@
       <footer class="site-footer">
         <div class="site-footer-inner">
           <p>&copy; 2026 Johnsen IT. Alle rettigheter er reservert.</p>
+          <p>Utviklet av Michael Johnsen</p>
         </div>
       </footer>
     </main>
