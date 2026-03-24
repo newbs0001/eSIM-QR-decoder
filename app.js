@@ -25,35 +25,44 @@
 
   app.innerHTML = `
     <main class="app-shell">
-      <section class="content">
-        <header class="topbar panel panel-highlight">
-          <div class="topbar-row">
-            <div class="header-copy">
-              <h1>eSIM QR-dekoder</h1>
-              <p class="header-subtitle">Dekoder eSIM QR-koder lokalt i nettleseren, uten opplasting eller lagring.</p>
-            </div>
-
-            <button id="back-button" class="secondary-button header-back is-hidden" type="button">Tilbake</button>
+      <header class="masthead">
+        <div class="masthead-inner">
+          <div class="masthead-brand">
+            <p class="masthead-kicker">Johnsen IT</p>
+            <h1>eSIM QR-dekoder</h1>
+            <p class="header-subtitle">Dekoder eSIM QR-koder lokalt i nettleseren, uten opplasting eller lagring.</p>
           </div>
-        </header>
+          <button id="back-button" class="secondary-button header-back is-hidden" type="button">Tilbake</button>
+        </div>
+      </header>
+
+      <section class="content">
 
         <section id="landing-section" class="landing-layout">
           <section class="privacy-card">
-            <h2>Sikkerhet &amp; Personvern</h2>
-            <p>
-              Alt skjer lokalt i nettleseren din. Ingen data sendes, lagres eller spores.<br />
-              Applikasjonen er <a href="https://github.com/newbs0001/eSIM-QR-decoder" target="_blank" rel="noreferrer">open-source</a>.
-            </p>
+            <div class="panel-titlebar">
+              <h2>Sikkerhet &amp; Personvern</h2>
+            </div>
+            <div class="panel-body compact-body">
+              <p>
+                Alt skjer lokalt i nettleseren din. Ingen data sendes, lagres eller spores.<br />
+                Applikasjonen er <a href="https://github.com/newbs0001/eSIM-QR-decoder" target="_blank" rel="noreferrer">open-source</a>.
+              </p>
+            </div>
           </section>
 
           <section id="intake-panel" class="panel intake-panel">
-            <div class="intake-inner">
+            <div class="panel-titlebar">
+              <h2>eSIM QR</h2>
+            </div>
+            <div class="panel-body intake-inner">
               <div class="dropzone-copy">
                 <h2 class="dropzone-title">Slipp eSIM QR-bildet her</h2>
+                <p class="dropzone-subtitle">Dra inn et bilde, lim inn fra utklippstavlen eller velg en fil.</p>
               </div>
 
               <div class="button-row button-row-start">
-                <label class="upload-button" for="image-input">Last opp</label>
+                <label class="upload-button" for="image-input">Velg bilde</label>
                 <button id="paste-button" class="secondary-button" type="button">Lim inn</button>
                 <input id="image-input" type="file" accept="image/png,image/jpeg,image/webp,image/gif,image/bmp" />
               </div>
@@ -63,49 +72,65 @@
           </section>
 
           <section class="panel manual-panel">
-            <div class="panel-header">
+            <div class="panel-titlebar">
               <h2>Manuell inntasting</h2>
-              <p>Lim inn LPA-strengen direkte hvis du ikke jobber fra et QR-bilde.</p>
             </div>
+            <div class="panel-body">
+              <div class="panel-header">
+                <p>Lim inn LPA-strengen direkte hvis du ikke jobber fra et QR-bilde.</p>
+              </div>
 
-            <label class="field-label" for="manual-input">LPA-verdi</label>
-            <textarea
-              id="manual-input"
-              class="text-input"
-              rows="5"
-              spellcheck="false"
-              placeholder="Eksempel: LPA:1$sm-dp.example.com$ABCD1234EFGH5678"
-            ></textarea>
+              <label class="field-label" for="manual-input">LPA-verdi</label>
+              <textarea
+                id="manual-input"
+                class="text-input"
+                rows="5"
+                spellcheck="false"
+                placeholder="Eksempel: LPA:1$sm-dp.example.com$ABCD1234EFGH5678"
+              ></textarea>
 
-            <div class="manual-actions">
-              <button id="manual-submit" class="secondary-button" type="button">Vis resultat</button>
+              <div class="manual-actions">
+                <button id="manual-submit" class="secondary-button" type="button">Vis resultat</button>
+              </div>
             </div>
           </section>
         </section>
 
         <section id="results-view" class="results-view is-hidden">
           <section class="panel results-hero">
-            <div class="panel-header">
+            <div class="panel-titlebar">
               <h2>Dekodet resultat</h2>
-              <p>SM-DP+-adresse, aktiveringskode og eventuelle ekstra felt fra den dekodede verdien.</p>
             </div>
-            <div id="results" class="results"></div>
+            <div class="panel-body">
+              <div class="panel-header">
+                <p>SM-DP+-adresse, aktiveringskode og eventuelle ekstra felt fra den dekodede verdien.</p>
+              </div>
+              <div id="results" class="results"></div>
+            </div>
           </section>
 
           <section id="instructions-section" class="instructions-grid is-hidden">
             <article class="panel instruction-card">
-              <div class="panel-header">
+              <div class="panel-titlebar">
                 <h2><span class="brand-lower-i">i</span>Phone</h2>
-                <p>Instruksjoner for iPhone (iOS 26+).</p>
               </div>
-              <div id="iphone-template" class="instruction-body"></div>
+              <div class="panel-body">
+                <div class="panel-header">
+                  <p>Instruksjoner for iPhone (iOS 26+).</p>
+                </div>
+                <div id="iphone-template" class="instruction-body"></div>
+              </div>
             </article>
             <article class="panel instruction-card">
-              <div class="panel-header">
+              <div class="panel-titlebar">
                 <h2>Android</h2>
-                <p>Tilpasset for vanlige Android-menyer og eSIM-oppsett.</p>
               </div>
-              <div id="android-template" class="instruction-body"></div>
+              <div class="panel-body">
+                <div class="panel-header">
+                  <p>Tilpasset for vanlige Android-menyer og eSIM-oppsett.</p>
+                </div>
+                <div id="android-template" class="instruction-body"></div>
+              </div>
             </article>
           </section>
         </section>
