@@ -321,7 +321,8 @@
     if (platform === "iphone") {
       return `
         <ol>
-          <li>Åpne <strong>Innstillinger</strong> og gå til <strong>Mobilnett</strong> eller <strong>Mobildata</strong>.</li>
+          <li>Åpne <strong>Innstillinger</strong> og gå til <strong>Mobilnett</strong>.</li>
+          <li>Dersom du har inaktive SIM-kort på listen <strong>må de slettes</strong> før du installerer nytt eSIM.</li>
           <li>Velg <strong>Legg til eSIM</strong> eller <strong>Legg til mobilabonnement</strong>.</li>
           <li>Velg <strong>Bruk QR-kode</strong> hvis kunden kan skanne, eller <strong>Angi detaljer manuelt</strong> hvis de trenger hjelp.</li>
           <li>Skriv inn aktiveringsdetaljene nøyaktig som vist nedenfor.</li>
