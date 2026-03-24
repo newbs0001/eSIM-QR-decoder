@@ -96,7 +96,7 @@
           <section id="instructions-section" class="instructions-grid is-hidden">
             <article class="panel instruction-card">
               <div class="panel-header">
-                <h2>iPhone</h2>
+                <h2><span class="brand-lower-i">i</span>Phone</h2>
                 <p>Instruksjoner for iPhone (iOS 26+).</p>
               </div>
               <div id="iphone-template" class="instruction-body"></div>
