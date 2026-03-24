@@ -92,7 +92,7 @@ button:disabled {
 .masthead-inner,
 .content,
 .site-footer-inner {
-  width: min(840px, calc(100vw - 2rem));
+  width: min(980px, calc(100vw - 2rem));
   margin: 0 auto;
 }
 
@@ -484,7 +484,7 @@ code {
   .masthead-inner,
   .content,
   .site-footer-inner {
-    width: min(100vw - 1rem, 840px);
+    width: min(100vw - 1rem, 980px);
   }
 
   .content {
