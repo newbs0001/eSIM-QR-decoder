@@ -424,14 +424,12 @@
         <div class="result-dropdown-body">
           <div class="result-card result-card-standard result-card-link">
             <p class="result-label result-card-label">Installasjonslenke</p>
-            <div class="result-card-code result-link-stack">
-              <pre class="result-code">${escapeHtml(installLink)}</pre>
-              <p class="result-inline-note">Kan fungere på enkelte enheter, men QR-kode eller manuell registrering er fortsatt tryggest.</p>
-            </div>
+            <pre class="result-code result-card-code">${escapeHtml(installLink)}</pre>
             <button class="copy-button icon-copy-button result-card-copy" type="button" aria-label="Installasjonslenke" title="Kopier" data-copy="${encodedLink}" data-copy-label="Installasjonslenke">
               ${copyIconMarkup()}
             </button>
           </div>
+          <p class="result-inline-note result-inline-warning">Denne funksjonen fungerer kun på iOS, og bare på enkelte enheter. For at lenken skal fungere, må den sendes på en bestemt måte. Bruk manuell inntasting inntil videre.</p>
         </div>
       </details>
     `;

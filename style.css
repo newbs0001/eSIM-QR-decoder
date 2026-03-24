@@ -441,11 +441,6 @@ h3 {
   word-break: break-word;
 }
 
-.result-link-stack {
-  display: grid;
-  gap: 0.45rem;
-}
-
 .result-dropdown {
   border: 1px solid var(--border-soft);
   background: var(--bg-panel-soft);
@@ -476,12 +471,18 @@ h3 {
 
 .result-dropdown-body {
   padding: 0 0.8rem 0.8rem;
+  display: grid;
+  gap: 0.45rem;
 }
 
 .result-inline-note {
   color: var(--text-muted);
   font-size: 0.76rem;
   line-height: 1.35;
+}
+
+.result-inline-warning {
+  color: var(--error);
 }
 
 .result-card-actions {
