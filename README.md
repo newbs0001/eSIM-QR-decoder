@@ -3,8 +3,6 @@
 Lite internt webverktøy for dekoding av eSIM-QR-koder helt klient-side.
 
 ## Funksjoner
-
-- Statisk side som kan distribueres til Cloudflare Pages
 - Ingen backend, API, database, analyse, sporing eller server-side prosessering
 - Ingen localStorage- eller sessionStorage-lagring som standard
 - Lim inn rå QR-/LPA-tekst
