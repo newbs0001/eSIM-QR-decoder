@@ -434,6 +434,9 @@ h3 {
   font-family: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
   font-size: 0.9rem;
   line-height: 1.4;
+  display: flex;
+  align-items: center;
+  min-height: 48px;
   white-space: pre-wrap;
   word-break: break-word;
 }
@@ -441,6 +444,38 @@ h3 {
 .result-link-stack {
   display: grid;
   gap: 0.45rem;
+}
+
+.result-dropdown {
+  border: 1px solid var(--border-soft);
+  background: var(--bg-panel-soft);
+}
+
+.result-dropdown-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  list-style: none;
+  padding: 0.8rem;
+  color: var(--text-strong);
+  font-weight: 700;
+}
+
+.result-dropdown-summary::-webkit-details-marker {
+  display: none;
+}
+
+.result-dropdown .guidance-chevron {
+  border-color: var(--text-strong);
+}
+
+.result-dropdown[open] .guidance-chevron {
+  transform: rotate(225deg);
+}
+
+.result-dropdown-body {
+  padding: 0 0.8rem 0.8rem;
 }
 
 .result-inline-note {
@@ -453,12 +488,9 @@ h3 {
   grid-area: copy;
   display: grid;
   gap: 0.55rem;
+  justify-items: center;
+  align-content: center;
   align-self: center;
-}
-
-.result-link-button {
-  min-height: 40px;
-  padding: 0.55rem 0.7rem;
 }
 
 .result-code-priority {

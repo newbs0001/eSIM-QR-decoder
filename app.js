@@ -416,19 +416,24 @@
     const encodedLink = encodeURIComponent(installLink);
 
     return `
-      <div class="result-card result-card-standard result-card-link">
-        <p class="result-label result-card-label">Installasjonslenke</p>
-        <div class="result-card-code result-link-stack">
-          <pre class="result-code">${escapeHtml(installLink)}</pre>
-          <p class="result-inline-note">Kan fungere på enkelte enheter, men QR-kode eller manuell registrering er fortsatt tryggest.</p>
+      <details class="result-dropdown">
+        <summary class="result-dropdown-summary">
+          <span>Installasjonslenke</span>
+          <span class="guidance-chevron" aria-hidden="true"></span>
+        </summary>
+        <div class="result-dropdown-body">
+          <div class="result-card result-card-standard result-card-link">
+            <p class="result-label result-card-label">Installasjonslenke</p>
+            <div class="result-card-code result-link-stack">
+              <pre class="result-code">${escapeHtml(installLink)}</pre>
+              <p class="result-inline-note">Kan fungere på enkelte enheter, men QR-kode eller manuell registrering er fortsatt tryggest.</p>
+            </div>
+            <button class="copy-button icon-copy-button result-card-copy" type="button" aria-label="Installasjonslenke" title="Kopier" data-copy="${encodedLink}" data-copy-label="Installasjonslenke">
+              ${copyIconMarkup()}
+            </button>
+          </div>
         </div>
-        <div class="result-card-actions">
-          <a class="secondary-button result-link-button" href="${escapeHtml(installLink)}">Åpne</a>
-          <button class="copy-button icon-copy-button result-card-copy" type="button" aria-label="Installasjonslenke" title="Kopier" data-copy="${encodedLink}" data-copy-label="Installasjonslenke">
-            ${copyIconMarkup()}
-          </button>
-        </div>
-      </div>
+      </details>
     `;
   }
 
