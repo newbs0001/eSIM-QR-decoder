@@ -284,6 +284,22 @@ h3 {
   min-width: 100px;
 }
 
+.icon-copy-button {
+  width: 48px;
+  min-width: 48px;
+  height: 48px;
+  padding: 0;
+  justify-self: center;
+  align-self: center;
+}
+
+.icon-copy-button svg {
+  width: 19px;
+  height: 19px;
+  fill: currentColor;
+  display: block;
+}
+
 .copy-button.is-copied {
   background: #24402d;
   border-color: #3d8e56;
@@ -347,8 +363,12 @@ h3 {
   gap: 1rem;
 }
 
-.header-back {
-  margin-left: auto;
+.results-toolbar {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.back-button {
   white-space: nowrap;
   min-height: 32px;
   padding: 0.4rem 0.7rem;
@@ -373,10 +393,28 @@ h3 {
 
 .result-card {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr) 64px;
+  grid-template-areas:
+    "label label"
+    "code copy";
   gap: 0.9rem;
-  align-items: center;
+  align-items: start;
   padding: 0.8rem;
+}
+
+.result-card-label {
+  grid-area: label;
+  margin-bottom: -0.2rem;
+}
+
+.result-card-code {
+  grid-area: code;
+  min-width: 0;
+}
+
+.result-card-copy {
+  grid-area: copy;
+  margin-top: 0;
 }
 
 .result-label {
@@ -400,6 +438,29 @@ h3 {
   word-break: break-word;
 }
 
+.result-link-stack {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.result-inline-note {
+  color: var(--text-muted);
+  font-size: 0.76rem;
+  line-height: 1.35;
+}
+
+.result-card-actions {
+  grid-area: copy;
+  display: grid;
+  gap: 0.55rem;
+  align-self: center;
+}
+
+.result-link-button {
+  min-height: 40px;
+  padding: 0.55rem 0.7rem;
+}
+
 .result-code-priority {
   font-size: 0.95rem;
 }
@@ -417,6 +478,35 @@ h3 {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
+}
+
+.instructions-panel > .panel-body {
+  padding-top: 1rem;
+}
+
+.guidance-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+  cursor: pointer;
+}
+
+.guidance-summary::-webkit-details-marker {
+  display: none;
+}
+
+.guidance-chevron {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-right: 2px solid #f7f0d4;
+  border-bottom: 2px solid #f7f0d4;
+  transform: rotate(45deg);
+  transition: transform 140ms ease;
+}
+
+.instructions-panel[open] .guidance-chevron {
+  transform: rotate(225deg);
 }
 
 .instruction-body ol {
@@ -454,6 +544,38 @@ h3 {
 
 .template-copy-button {
   white-space: nowrap;
+}
+
+.raw-text-toggle {
+  margin-top: 0.15rem;
+}
+
+.raw-text-summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  list-style: none;
+}
+
+.raw-text-summary::-webkit-details-marker {
+  display: none;
+}
+
+.raw-text-summary::before {
+  content: "+";
+  font-size: 0.95rem;
+  line-height: 1;
+}
+
+.raw-text-toggle[open] .raw-text-summary::before {
+  content: "-";
+}
+
+.raw-text-content {
+  margin-top: 0.55rem;
 }
 
 .site-footer {
@@ -525,6 +647,19 @@ code {
 
   .result-card {
     grid-template-columns: 1fr;
+    grid-template-areas:
+      "label"
+      "code"
+      "copy";
+  }
+
+  .result-card-copy {
+    margin-top: 0;
+    justify-self: stretch;
+  }
+
+  .result-card-actions {
+    justify-self: stretch;
   }
 }
 

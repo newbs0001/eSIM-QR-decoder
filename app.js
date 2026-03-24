@@ -2,21 +2,19 @@
   const app = document.querySelector("#app");
 
   const text = {
-    idle: "Dra inn et bilde, lim inn fra utklippstavlen (CTRL + V) eller velg en fil.",
-    empty: "Ingen dekodet verdi ennå.",
+    idle: "Støtter også Ctrl + V for innliming av bilde.",
     rawText: "Rå dekodet tekst",
     smdp: "SM-DP+-adresse",
     activation: "Aktiveringskode",
     confirmation: "Bekreftelseskode",
-    extrasEmpty: "Ingen ekstra felt",
-    invalidLpa: "Den dekodede teksten samsvarer ikke med forventet format LPA:versjon$SM-DP+$aktiveringskode, så bare råteksten vises."
+    extras: "Ekstra felt",
+    invalidLpa: "Den dekodede teksten samsvarer ikke med forventet format for LPA: versjon$SM-DP+$aktiveringskode, så bare råteksten vises."
   };
 
   const state = {
     rawText: "",
     parsed: null,
     isDragging: false,
-    manualOpen: true,
     status: {
       type: "idle",
       message: text.idle
@@ -29,40 +27,38 @@
         <div class="masthead-inner">
           <div class="masthead-brand">
             <h1>eSIM QR-dekoder</h1>
-            <p class="header-subtitle">Dekoder eSIM QR-koder lokalt i nettleseren, uten opplasting eller lagring.</p>
+            <p class="header-subtitle">Dekod eSIM-QR-koder lokalt i nettleseren, uten opplasting eller lagring.</p>
           </div>
-          <button id="back-button" class="secondary-button header-back is-hidden" type="button">Tilbake</button>
         </div>
       </header>
 
       <section class="content">
-
         <section id="landing-section" class="landing-layout">
           <section class="privacy-card">
             <div class="panel-titlebar">
-              <h2>Sikkerhet &amp; Personvern</h2>
+              <h2>Sikkerhet og personvern</h2>
             </div>
             <div class="panel-body compact-body">
               <p>
-                Alt skjer lokalt i nettleseren din. Ingen data sendes, lagres eller spores.<br />
-                Applikasjonen er <a href="https://github.com/newbs0001/eSIM-QR-decoder" target="_blank" rel="noreferrer">open-source</a>.
+                Alt behandles lokalt i nettleseren din. Ingen data sendes, lagres eller spores.<br />
+                Applikasjonen er <a href="https://github.com/newbs0001/eSIM-QR-decoder" target="_blank" rel="noreferrer">open source</a>.
               </p>
             </div>
           </section>
 
           <section id="intake-panel" class="panel intake-panel">
             <div class="panel-titlebar">
-              <h2>eSIM QR</h2>
+              <h2>eSIM-QR</h2>
             </div>
             <div class="panel-body intake-inner">
               <div class="dropzone-copy">
-                <h2 class="dropzone-title">Slipp eSIM her</h2>
+                <h2 class="dropzone-title">Slipp eSIM-QR-koden her</h2>
                 <p class="dropzone-subtitle">Dra inn et bilde, lim inn fra utklippstavlen eller velg en fil.</p>
               </div>
 
               <div class="button-row button-row-start">
                 <label class="upload-button" for="image-input">Velg bilde</label>
-                <button id="paste-button" class="secondary-button" type="button">Lim inn</button>
+                <button id="paste-button" class="secondary-button" type="button">Lim inn bilde</button>
                 <input id="image-input" type="file" accept="image/png,image/jpeg,image/webp,image/gif,image/bmp" />
               </div>
 
@@ -76,10 +72,10 @@
             </div>
             <div class="panel-body">
               <div class="panel-header">
-                <p>Lim inn LPA-strengen direkte hvis du ikke jobber fra et QR-bilde.</p>
+                <p>Lim inn LPA-strengen direkte hvis du ikke bruker et QR-bilde.</p>
               </div>
 
-              <label class="field-label" for="manual-input">LPA-verdi</label>
+              <label class="field-label" for="manual-input">LPA-streng</label>
               <textarea
                 id="manual-input"
                 class="text-input"
@@ -96,49 +92,60 @@
         </section>
 
         <section id="results-view" class="results-view is-hidden">
+          <div class="results-toolbar">
+            <button id="back-button" class="secondary-button back-button is-hidden" type="button">Tilbake</button>
+          </div>
+
           <section class="panel results-hero">
             <div class="panel-titlebar">
               <h2>Dekodet resultat</h2>
             </div>
             <div class="panel-body">
               <div class="panel-header">
-                <p>SM-DP+-adresse, aktiveringskode og eventuelle ekstra felt fra den dekodede verdien.</p>
+                <p>Her ser du SM-DP+-adresse, aktiveringskode og eventuelle ekstra felt fra den dekodede verdien.</p>
               </div>
               <div id="results" class="results"></div>
             </div>
           </section>
 
-          <section id="instructions-section" class="instructions-grid is-hidden">
-            <article class="panel instruction-card">
-              <div class="panel-titlebar">
-                <h2>iPhone</h2>
-              </div>
-              <div class="panel-body">
-                <div class="panel-header">
-                  <p>Instruksjoner for iPhone (iOS 26+).</p>
-                </div>
-                <div id="iphone-template" class="instruction-body"></div>
-              </div>
-            </article>
-            <article class="panel instruction-card">
-              <div class="panel-titlebar">
-                <h2>Android</h2>
-              </div>
-              <div class="panel-body">
-                <div class="panel-header">
-                  <p>Tilpasset for vanlige Android-menyer og eSIM-oppsett.</p>
-                </div>
-                <div id="android-template" class="instruction-body"></div>
-              </div>
-            </article>
-          </section>
+          <details id="instructions-section" class="panel instructions-panel is-hidden">
+            <summary class="panel-titlebar guidance-summary">
+              <h2>Veiledning for iPhone og Android</h2>
+              <span class="guidance-chevron" aria-hidden="true"></span>
+            </summary>
+            <div class="panel-body">
+              <section class="instructions-grid">
+                <article class="panel instruction-card">
+                  <div class="panel-titlebar">
+                    <h2>iPhone</h2>
+                  </div>
+                  <div class="panel-body">
+                    <div class="panel-header">
+                      <p>Instruksjoner for iPhone.</p>
+                    </div>
+                    <div id="iphone-template" class="instruction-body"></div>
+                  </div>
+                </article>
+                <article class="panel instruction-card">
+                  <div class="panel-titlebar">
+                    <h2>Android</h2>
+                  </div>
+                  <div class="panel-body">
+                    <div class="panel-header">
+                      <p>Instruksjoner for Android. Menyene kan variere mellom ulike produsenter og modeller.</p>
+                    </div>
+                    <div id="android-template" class="instruction-body"></div>
+                  </div>
+                </article>
+              </section>
+            </div>
+          </details>
         </section>
-
       </section>
 
       <footer class="site-footer">
         <div class="site-footer-inner">
-          <p>&copy; 2026 Johnsen IT. Alle rettigheter er reservert.</p>
+          <p>&copy; 2026 Johnsen IT. Alle rettigheter forbeholdt.</p>
           <p>Utviklet av Michael Johnsen</p>
         </div>
       </footer>
@@ -232,18 +239,18 @@
   }
 
   function animateCopyButton(button) {
-    const originalText = button.dataset.originalText || button.textContent || "Kopier";
-    button.dataset.originalText = originalText;
+    const originalMarkup = button.dataset.originalMarkup || button.innerHTML;
+    button.dataset.originalMarkup = originalMarkup;
 
     if (button.dataset.resetTimer) {
       window.clearTimeout(Number(button.dataset.resetTimer));
     }
 
-    button.textContent = "Kopiert";
+    button.innerHTML = copiedIconMarkup();
     button.classList.add("is-copied");
 
     const resetTimer = window.setTimeout(function () {
-      button.textContent = originalText;
+      button.innerHTML = originalMarkup;
       button.classList.remove("is-copied");
       delete button.dataset.resetTimer;
     }, 1400);
@@ -251,39 +258,62 @@
     button.dataset.resetTimer = String(resetTimer);
   }
 
-  function fieldCard(label, value, copyLabel) {
-    const safeValue = value ? escapeHtml(value) : '<span class="muted">Ikke tilgjengelig</span>';
+  function copyIconMarkup() {
+    return `
+      <svg viewBox="0 0 512 512" aria-hidden="true" focusable="false">
+        <path d="M272 0H80C53.5 0 32 21.5 32 48V304c0 26.5 21.5 48 48 48H272c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zM80 304V48H272V304H80z"></path>
+        <path d="M160 160H432c26.5 0 48 21.5 48 48V464c0 26.5-21.5 48-48 48H176c-26.5 0-48-21.5-48-48V384h48v80H432V208H160V160z"></path>
+      </svg>
+    `;
+  }
+
+  function copiedIconMarkup() {
+    return `
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M9.2 16.6 4.8 12.2l1.4-1.4 3 3 8.6-8.6 1.4 1.4z"></path>
+      </svg>
+    `;
+  }
+
+  function buildInstallLink(rawText, parsed) {
+    if (!rawText || !parsed || !parsed.isLpa) {
+      return "";
+    }
+
+    return rawText.replace(/^LPA:/i, "lpa:");
+  }
+
+  function fieldCard(label, value, copyLabel, options) {
+    const settings = options || {};
+    const displayValue = settings.displayValue !== undefined ? settings.displayValue : value;
+    const safeValue = displayValue ? escapeHtml(displayValue) : '<span class="muted">Ikke tilgjengelig</span>';
     const disabled = value ? "" : "disabled";
     const encodedValue = encodeURIComponent(value || "");
+    const codeClass = settings.subtle ? "result-code result-code-subtle" : "result-code";
 
     return `
       <div class="result-card result-card-standard">
-        <div>
-          <p class="result-label">${escapeHtml(label)}</p>
-          <pre class="result-code ${label === text.rawText ? "result-code-subtle" : ""}">${safeValue}</pre>
-        </div>
-        <button class="copy-button" type="button" data-copy="${encodedValue}" data-copy-label="${escapeHtml(copyLabel)}" ${disabled}>
-          Kopier
+        <p class="result-label result-card-label">${escapeHtml(label)}</p>
+        <pre class="${codeClass} result-card-code">${safeValue}</pre>
+        <button class="copy-button icon-copy-button result-card-copy" type="button" aria-label="${escapeHtml(copyLabel)}" title="Kopier" data-copy="${encodedValue}" data-copy-label="${escapeHtml(copyLabel)}" ${disabled}>
+          ${copyIconMarkup()}
         </button>
       </div>
     `;
   }
 
-  function priorityFieldCard(label, value, copyLabel) {
-    if (!value) {
-      return "";
-    }
-
-    const encodedValue = encodeURIComponent(value);
+  function priorityFieldCard(label, value, copyLabel, emptyDisplay) {
+    const hasValue = Boolean(value);
+    const displayValue = hasValue ? value : emptyDisplay;
+    const encodedValue = encodeURIComponent(value || "");
+    const disabled = hasValue ? "" : "disabled";
 
     return `
       <div class="result-card result-card-priority">
-        <div>
-          <p class="result-label">${escapeHtml(label)}</p>
-          <pre class="result-code result-code-priority">${escapeHtml(value)}</pre>
-        </div>
-        <button class="copy-button copy-button-priority" type="button" data-copy="${encodedValue}" data-copy-label="${escapeHtml(copyLabel)}">
-          Kopier
+        <p class="result-label result-card-label">${escapeHtml(label)}</p>
+        <pre class="result-code result-code-priority result-card-code">${escapeHtml(displayValue)}</pre>
+        <button class="copy-button copy-button-priority icon-copy-button result-card-copy" type="button" aria-label="${escapeHtml(copyLabel)}" title="Kopier" data-copy="${encodedValue}" data-copy-label="${escapeHtml(copyLabel)}" ${disabled}>
+          ${copyIconMarkup()}
         </button>
       </div>
     `;
@@ -296,38 +326,34 @@
 
     const lines = platform === "iphone"
       ? [
-        "Du kan bruke disse eSIM-detaljene på iPhone under manuell aktivering:",
-        " ",
-        "Gå til Innstillinger > Mobilnett > Legg til eSIM > Skann QR-kode > Oppgi informasjon manuelt",
-        " ",
-        "Skriv inn detaljene nedenfor nøyaktig som oppgitt:",  
-          "SM-DP+-adresse: " + (parsed.smdpAddress || "[angi SM-DP+-adresse]"),
-          "Aktiveringskode: " + (parsed.activationCode || "[angi aktiveringskode]"),
-          parsed.confirmationCode ? "Bekreftelseskode: " + parsed.confirmationCode : "",
-          "",
-
-        ]
+        "Du kan bruke disse eSIM-detaljene på iPhone ved manuell aktivering:",
+        "",
+        "Gå til Innstillinger > Mobilnett > Legg til eSIM.",
+        "Velg alternativet for å angi informasjon manuelt.",
+        "",
+        "Skriv inn detaljene nedenfor nøyaktig slik de er oppgitt:",
+        "SM-DP+-adresse: " + (parsed.smdpAddress || "[SM-DP+-adresse]"),
+        "Aktiveringskode: " + (parsed.activationCode || "[aktiveringskode]")
+      ]
       : [
-          "Du kan bruk disse eSIM-detaljene på Android under manuell aktivering:",
-          "SM-DP+-adresse: " + (parsed.smdpAddress || "[angi SM-DP+-adresse]"),
-          "Aktiveringskode: " + (parsed.activationCode || "[angi aktiveringskode]"),
-          parsed.confirmationCode ? "Bekreftelseskode: " + parsed.confirmationCode : "",
-          "",
-          "Gå til Innstillinger > Nettverk/SIM > Legg til eSIM og velg manuell registrering.",
-          "Skriv inn detaljene over nøyaktig som oppgitt."
-        ];
+        "Du kan bruke disse eSIM-detaljene på Android ved manuell aktivering:",
+        "",
+        "Åpne Innstillinger og finn menyen for SIM, mobilnett eller tilkoblinger.",
+        "Velg å legge til eSIM manuelt.",
+        "Skriv inn detaljene nedenfor nøyaktig slik de er oppgitt:",
+        "SM-DP+-adresse: " + (parsed.smdpAddress || "[SM-DP+-adresse]"),
+        "Aktiveringskode: " + (parsed.activationCode || "[aktiveringskode]")
+      ];
 
-    return lines.filter(Boolean).join("\n");
+    return lines.join("\n");
   }
 
   function buildInstructionMarkup(platform, parsed) {
     const details = parsed && parsed.isLpa
       ? [
-          text.smdp + ": " + (parsed.smdpAddress || "[angi SM-DP+-adresse]"),
-          text.activation + ": " + (parsed.activationCode || "[angi aktiveringskode]"),
-          parsed.confirmationCode ? text.confirmation + ": " + parsed.confirmationCode : "",
-          parsed.extras.length ? "Ekstra felt: " + parsed.extras.join(" | ") : ""
-        ].filter(Boolean)
+          text.smdp + ": " + (parsed.smdpAddress || "[SM-DP+-adresse]"),
+          text.activation + ": " + (parsed.activationCode || "[aktiveringskode]")
+        ]
       : [];
     const message = buildCustomerMessage(platform, parsed);
     const encodedMessage = encodeURIComponent(message);
@@ -349,27 +375,60 @@
       return `
         <ol>
           <li>Åpne <strong>Innstillinger</strong> og gå til <strong>Mobilnett</strong>.</li>
-          <li>Dersom kunde har <strong>inaktive SIM-kort</strong> på listen MÅ de <strong>slettes</strong> før nytt eSIM blir installert.</li>
-          <li>Velg <strong>Legg til eSIM</strong> eller <strong>Legg til mobilabonnement</strong>.</li>
-          <li>Velg <strong>Bruk QR-kode</strong> hvis kunden kan skanne, eller <strong>Angi detaljer manuelt</strong> hvis de trenger hjelp.</li>
-          <li>Skriv inn aktiveringsdetaljene nøyaktig som vist nedenfor.</li>
-          <li>Følg de resterende stegene for å navngi linjen og fullføre aktiveringen.</li>
+          <li>Hvis det ligger inaktive eSIM-profiler på enheten, bør de slettes før du installerer en ny.</li>
+          <li>Trykk på <strong>Legg til eSIM</strong> eller <strong>Legg til mobilabonnement</strong>.</li>
+          <li>Gå til <strong>Bruk QR-kode</strong> &gt; <strong>Skann QR-kode</strong> &gt; <strong>Oppgi informasjon manuelt</strong>.</li>
+          <li>Skriv inn aktiveringsdetaljene nøyaktig slik de vises nedenfor.</li>
+          <li>Følg de siste stegene på skjermen for å fullføre aktiveringen.</li>
         </ol>
         ${messageBlock}
-        ${details.length ? "<pre>" + escapeHtml(details.join("\n")) + "</pre>" : '<p class="muted">Dekod en LPA-verdi for å fylle ut detaljseksjonen.</p>'}
+        ${details.length ? "<pre>" + escapeHtml(details.join("\n")) + "</pre>" : '<p class="muted">Dekod en LPA-streng for å fylle ut detaljseksjonen.</p>'}
       `;
     }
 
     return `
       <ol>
-        <li>Åpne <strong>Innstillinger</strong> og gå til <strong>Nettverk og internett</strong>, <strong>Tilkoblinger</strong> eller <strong>SIM-behandling</strong>.</li>
-        <li>Velg <strong>Legg til eSIM</strong>, <strong>Last ned SIM</strong> eller tilsvarende valg på enheten.</li>
-        <li>Velg manuell registrering hvis kunden ikke kan skanne QR-koden.</li>
-        <li>Skriv inn SM-DP+-adressen og aktiveringskoden nøyaktig som oppgitt.</li>
-        <li>Fullfør stegene for å laste ned og aktivere eSIM-profilen.</li>
+        <li>Åpne <strong>Innstillinger</strong> og gå til <strong>Nettverk og internett</strong>, <strong>Tilkoblinger</strong> eller <strong>Mobilnett</strong>.</li>
+        <li>Velg alternativet for å legge til eSIM eller mobilabonnement.</li>
+        <li>Velg manuell registrering dersom QR-koden ikke kan skannes.</li>
+        <li>Skriv inn SM-DP+-adresse og aktiveringskode nøyaktig som oppgitt.</li>
+        <li>Følg resten av stegene på skjermen for å laste ned og aktivere eSIM-profilen.</li>
       </ol>
       ${messageBlock}
-      ${details.length ? "<pre>" + escapeHtml(details.join("\n")) + "</pre>" : '<p class="muted">Dekod en LPA-verdi for å fylle ut detaljseksjonen.</p>'}
+      ${details.length ? "<pre>" + escapeHtml(details.join("\n")) + "</pre>" : '<p class="muted">Dekod en LPA-streng for å fylle ut detaljseksjonen.</p>'}
+    `;
+  }
+
+  function buildRawTextToggle(rawText) {
+    const encodedValue = encodeURIComponent(rawText);
+
+    return `
+      <details class="raw-text-toggle">
+        <summary class="raw-text-summary">Vis rå dekodet tekst</summary>
+        <div class="raw-text-content">
+          ${fieldCard(text.rawText, rawText, text.rawText, { subtle: true })}
+        </div>
+      </details>
+    `;
+  }
+
+  function buildInstallLinkCard(installLink) {
+    const encodedLink = encodeURIComponent(installLink);
+
+    return `
+      <div class="result-card result-card-standard result-card-link">
+        <p class="result-label result-card-label">Installasjonslenke</p>
+        <div class="result-card-code result-link-stack">
+          <pre class="result-code">${escapeHtml(installLink)}</pre>
+          <p class="result-inline-note">Kan fungere på enkelte enheter, men QR-kode eller manuell registrering er fortsatt tryggest.</p>
+        </div>
+        <div class="result-card-actions">
+          <a class="secondary-button result-link-button" href="${escapeHtml(installLink)}">Åpne</a>
+          <button class="copy-button icon-copy-button result-card-copy" type="button" aria-label="Installasjonslenke" title="Kopier" data-copy="${encodedLink}" data-copy-label="Installasjonslenke">
+            ${copyIconMarkup()}
+          </button>
+        </div>
+      </div>
     `;
   }
 
@@ -388,6 +447,7 @@
     if (!rawText) {
       elements.results.innerHTML = "";
       elements.instructionsSection.classList.add("is-hidden");
+      elements.instructionsSection.removeAttribute("open");
       elements.iphoneTemplate.innerHTML = buildInstructionMarkup("iphone", null);
       elements.androidTemplate.innerHTML = buildInstructionMarkup("android", null);
       renderLayoutState();
@@ -396,14 +456,16 @@
 
     const extrasMarkup = parsed && parsed.extras && parsed.extras.length
       ? parsed.extras.map(function (extra, index) {
-          return fieldCard("Ekstra " + (index + 1), extra, "Ekstra " + (index + 1));
+          return fieldCard(text.extras + " " + (index + 1), extra, text.extras + " " + (index + 1));
         }).join("")
       : "";
+    const installLink = buildInstallLink(rawText, parsed);
+    const installLinkMarkup = installLink ? buildInstallLinkCard(installLink) : "";
 
     const priorityMarkup = [
-      priorityFieldCard(text.smdp, parsed ? parsed.smdpAddress : "", text.smdp),
-      priorityFieldCard(text.activation, parsed ? parsed.activationCode : "", text.activation),
-      priorityFieldCard(text.confirmation, parsed ? parsed.confirmationCode : "", text.confirmation)
+      priorityFieldCard(text.smdp, parsed ? parsed.smdpAddress : "", text.smdp, "Blank"),
+      priorityFieldCard(text.activation, parsed ? parsed.activationCode : "", text.activation, "Blank"),
+      priorityFieldCard(text.confirmation, parsed ? parsed.confirmationCode : "", text.confirmation, "Blank")
     ].join("");
 
     const nonLpaNote = parsed && !parsed.isLpa
@@ -413,14 +475,16 @@
     elements.results.innerHTML = `
       ${nonLpaNote}
       ${priorityMarkup}
-      ${fieldCard(text.rawText, rawText, text.rawText)}
+      ${installLinkMarkup}
       ${extrasMarkup}
+      ${buildRawTextToggle(rawText)}
     `;
 
     if (parsed && parsed.isLpa) {
       elements.instructionsSection.classList.remove("is-hidden");
     } else {
       elements.instructionsSection.classList.add("is-hidden");
+      elements.instructionsSection.removeAttribute("open");
     }
 
     elements.iphoneTemplate.innerHTML = buildInstructionMarkup("iphone", parsed);
@@ -439,7 +503,7 @@
     }
 
     if (state.parsed && state.parsed.isLpa) {
-      setStatus("success", sourceLabel + " ble dekodet lokalt. Parsede eSIM-felt er klare til kopiering.");
+      setStatus("success", sourceLabel + " ble dekodet lokalt. eSIM-feltene er klare til kopiering.");
       return;
     }
 
@@ -448,7 +512,7 @@
 
   async function readClipboardImage() {
     if (!navigator.clipboard || !navigator.clipboard.read) {
-      throw new Error("Utklippstavle-lesing er ikke tilgjengelig i denne nettleseren. Bruk Ctrl+V eller velg en fil.");
+      throw new Error("Det er ikke mulig å lese fra utklippstavlen i denne nettleseren. Bruk Ctrl + V eller velg en fil.");
     }
 
     const clipboardItems = await navigator.clipboard.read();
@@ -527,7 +591,7 @@
   }
 
   function decodeImageSource(file, sourceLabel) {
-    setStatus("idle", "Dekoder QR-bilde lokalt i nettleseren...");
+    setStatus("idle", "Dekoder eSIM-QR-koden lokalt i nettleseren...");
 
     decodeImageFile(file)
       .then(function (decodedText) {
@@ -544,7 +608,7 @@
       return;
     }
 
-    decodeImageSource(file, "QR-bildet");
+    decodeImageSource(file, "Bildet");
   });
 
   elements.manualSubmit.addEventListener("click", function () {
@@ -564,7 +628,7 @@
   elements.pasteButton.addEventListener("click", function () {
     readClipboardImage()
       .then(function (blob) {
-        decodeImageSource(blob, "Utklippsbildet");
+        decodeImageSource(blob, "Bildet fra utklippstavlen");
       })
       .catch(function (error) {
         setStatus("error", error instanceof Error ? error.message : "Kunne ikke lese utklippstavlen.");
@@ -582,7 +646,7 @@
     }
 
     event.preventDefault();
-    decodeImageSource(pastedImage, "Utklippsbildet");
+    decodeImageSource(pastedImage, "Bildet fra utklippstavlen");
   });
 
   elements.intakePanel.addEventListener("dragenter", function (event) {
@@ -612,11 +676,11 @@
 
     const droppedImage = getDroppedImageFile(event);
     if (!droppedImage) {
-      setStatus("error", "Slipp en bildefil med QR-kode for å dekode.");
+      setStatus("error", "Slipp en bildefil med en QR-kode for å dekode den.");
       return;
     }
 
-    decodeImageSource(droppedImage, "Det slupne bildet");
+    decodeImageSource(droppedImage, "Det innsatte bildet");
   });
 
   app.addEventListener("click", function (event) {
