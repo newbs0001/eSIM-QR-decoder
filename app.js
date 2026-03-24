@@ -28,7 +28,6 @@
       <header class="masthead">
         <div class="masthead-inner">
           <div class="masthead-brand">
-            <p class="masthead-kicker">Johnsen IT</p>
             <h1>eSIM QR-dekoder</h1>
             <p class="header-subtitle">Dekoder eSIM QR-koder lokalt i nettleseren, uten opplasting eller lagring.</p>
           </div>
@@ -57,7 +56,7 @@
             </div>
             <div class="panel-body intake-inner">
               <div class="dropzone-copy">
-                <h2 class="dropzone-title">Slipp eSIM QR-bildet her</h2>
+                <h2 class="dropzone-title">Slipp eSIM her</h2>
                 <p class="dropzone-subtitle">Dra inn et bilde, lim inn fra utklippstavlen eller velg en fil.</p>
               </div>
 
@@ -112,7 +111,7 @@
           <section id="instructions-section" class="instructions-grid is-hidden">
             <article class="panel instruction-card">
               <div class="panel-titlebar">
-                <h2><span class="brand-lower-i">i</span>Phone</h2>
+                <h2>iPhone</h2>
               </div>
               <div class="panel-body">
                 <div class="panel-header">
