@@ -16,23 +16,8 @@ Lite internt webverktøy for dekoding av eSIM-QR-koder helt klient-side.
 - Kundevendte instruksjonsmaler for iPhone og Android
 - Personvernvennlig språk i grensesnittet
 
-## Åpne lokalt
-
-```bash
-Åpne `index.html` direkte i en nettleser.
-```
-
-## Valgfri utviklingsserver
-
-```bash
-npm install
-npm run dev
-```
-
-## Valgfri produksjonsbygging
+# Valgfri produksjonsbygging
 
 ```bash
 npm run build
 ```
-
-Rotfilene er allerede statiske og kan distribueres som de er. Hvis du bruker den valgfrie Vite-flyten, bygges appen også til `dist/` for Cloudflare Pages.
