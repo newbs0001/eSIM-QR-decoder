@@ -40,8 +40,11 @@
 
         <section id="landing-section" class="landing-layout">
           <section class="privacy-card">
-            <h2>Personvern først</h2>
-            <p>Alt skjer lokalt i nettleseren din. Ingen data sendes, lagres eller spores.</p>
+            <h2>Sikkerhet &amp; Personvern</h2>
+            <p>
+              Alt skjer lokalt i nettleseren din. Ingen data sendes, lagres eller spores.<br />
+              Applikasjonen er <a href="https://github.com/newbs0001/eSIM-QR-decoder" target="_blank" rel="noreferrer">open-source</a>.
+            </p>
           </section>
 
           <section id="intake-panel" class="panel intake-panel">
@@ -94,7 +97,7 @@
             <article class="panel instruction-card">
               <div class="panel-header">
                 <h2>iPhone</h2>
-                <p>Klar melding til kunde ved manuell aktivering.</p>
+                <p>Instruksjoner for iPhone (iOS 26+).</p>
               </div>
               <div id="iphone-template" class="instruction-body"></div>
             </article>
@@ -322,7 +325,7 @@
       return `
         <ol>
           <li>Åpne <strong>Innstillinger</strong> og gå til <strong>Mobilnett</strong>.</li>
-          <li>Dersom du har inaktive SIM-kort på listen <strong>må de slettes</strong> før du installerer nytt eSIM.</li>
+          <li>Dersom kunde har <strong>inaktive SIM-kort</strong> på listen MÅ de <strong>slettes</strong> før nytt eSIM blir installert.</li>
           <li>Velg <strong>Legg til eSIM</strong> eller <strong>Legg til mobilabonnement</strong>.</li>
           <li>Velg <strong>Bruk QR-kode</strong> hvis kunden kan skanne, eller <strong>Angi detaljer manuelt</strong> hvis de trenger hjelp.</li>
           <li>Skriv inn aktiveringsdetaljene nøyaktig som vist nedenfor.</li>
