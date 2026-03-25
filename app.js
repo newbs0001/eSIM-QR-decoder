@@ -445,7 +445,7 @@
         <div class="result-dropdown-body">
           ${buildInstallLinkRow("iPhone-installasjonslenke", installLinks.iphone)}
           ${buildInstallLinkRow("Android-installasjonslenke", installLinks.android)}
-          <p class="result-inline-note result-inline-warning">BETA: Disse lenkene er under utprøving. iPhone-lenken støttes foreløpig bare på enkelte iOS-enheter. Android-lenken kan legges ved for testing, men støtte og oppførsel vil variere mellom enheter. Bruk manuell inntasting inntil videre.</p>
+          <p class="result-inline-note result-inline-warning">BETA: Disse lenkene er under utprøving. iPhone-lenken fungerer bare på enkelte enheter med iOS 17.4 eller nyere. Android-lenken fungerer bare på enkelte enheter med Android 10 eller nyere. Støtte og oppførsel kan variere, så bruk manuell inntasting inntil videre.</p>
         </div>
       </details>
     `;
