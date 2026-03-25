@@ -182,6 +182,10 @@ h3 {
   color: #fff5f8;
 }
 
+.privacy-card {
+  border-color: #b8381e;
+}
+
 .panel-titlebar h2 {
   color: #f7f0d4;
   font-size: 0.98rem;
