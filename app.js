@@ -96,17 +96,28 @@
             <button id="back-button" class="secondary-button back-button is-hidden" type="button">Tilbake</button>
           </div>
 
-          <section class="panel results-hero">
-            <div class="panel-titlebar">
-              <h2>Dekodet resultat</h2>
+          <details id="install-links-section" class="panel results-panel is-hidden">
+            <summary class="panel-titlebar guidance-summary">
+              <h2>Installasjonslenke <span class="beta-label">BETA</span></h2>
+              <span class="guidance-chevron" aria-hidden="true"></span>
+            </summary>
+            <div class="panel-body">
+              <div id="install-links" class="results"></div>
             </div>
+          </details>
+
+          <details id="manual-values-section" class="panel results-panel" open>
+            <summary class="panel-titlebar guidance-summary">
+              <h2>Manuelle verdier</h2>
+              <span class="guidance-chevron" aria-hidden="true"></span>
+            </summary>
             <div class="panel-body">
               <div class="panel-header">
                 <p>Her ser du SM-DP+-adresse, aktiveringskode og eventuelle ekstra felt fra den dekodede verdien.</p>
               </div>
               <div id="results" class="results"></div>
             </div>
-          </section>
+          </details>
 
           <details id="instructions-section" class="panel instructions-panel is-hidden">
             <summary class="panel-titlebar guidance-summary">
@@ -162,6 +173,9 @@
     status: document.querySelector("#status"),
     landingSection: document.querySelector("#landing-section"),
     resultsView: document.querySelector("#results-view"),
+    installLinksSection: document.querySelector("#install-links-section"),
+    installLinks: document.querySelector("#install-links"),
+    manualValuesSection: document.querySelector("#manual-values-section"),
     results: document.querySelector("#results"),
     instructionsSection: document.querySelector("#instructions-section"),
     iphoneTemplate: document.querySelector("#iphone-template"),
@@ -440,17 +454,9 @@
     }
 
     return `
-      <details class="result-dropdown">
-        <summary class="result-dropdown-summary">
-          <span class="result-dropdown-title">Installasjonslenke <span class="beta-label">BETA</span></span>
-          <span class="guidance-chevron" aria-hidden="true"></span>
-        </summary>
-        <div class="result-dropdown-body">
-          ${buildInstallLinkRow("iOS", "17.4+", installLinks.iphone)}
-          ${buildInstallLinkRow("Android", "10+", installLinks.android)}
-          <p class="result-inline-note result-inline-warning">BETA: Disse lenkene er under utprøving og fungerer bare på enkelte enheter. Støtte og oppførsel kan variere, så bruk manuell inntasting inntil videre.</p>
-        </div>
-      </details>
+      ${buildInstallLinkRow("iOS", "17.4+", installLinks.iphone)}
+      ${buildInstallLinkRow("Android", "10+", installLinks.android)}
+      <p class="result-inline-note result-inline-warning">BETA: Disse lenkene er under utprøving og fungerer bare på enkelte enheter. Støtte og oppførsel kan variere, så bruk manuell inntasting inntil videre.</p>
     `;
   }
 
@@ -467,7 +473,11 @@
     const rawText = state.rawText;
 
     if (!rawText) {
+      elements.installLinks.innerHTML = "";
       elements.results.innerHTML = "";
+      elements.installLinksSection.classList.add("is-hidden");
+      elements.installLinksSection.removeAttribute("open");
+      elements.manualValuesSection.setAttribute("open", "");
       elements.instructionsSection.classList.add("is-hidden");
       elements.instructionsSection.removeAttribute("open");
       elements.iphoneTemplate.innerHTML = buildInstructionMarkup("iphone", null);
@@ -497,18 +507,24 @@
     elements.results.innerHTML = `
       ${nonLpaNote}
       ${priorityMarkup}
-      ${installLinkMarkup}
       ${extrasMarkup}
       ${buildRawTextToggle(rawText)}
     `;
 
+    elements.installLinks.innerHTML = installLinkMarkup;
+
     if (parsed && parsed.isLpa) {
+      elements.installLinksSection.classList.remove("is-hidden");
+      elements.installLinksSection.removeAttribute("open");
       elements.instructionsSection.classList.remove("is-hidden");
     } else {
+      elements.installLinksSection.classList.add("is-hidden");
+      elements.installLinksSection.removeAttribute("open");
       elements.instructionsSection.classList.add("is-hidden");
       elements.instructionsSection.removeAttribute("open");
     }
 
+    elements.manualValuesSection.setAttribute("open", "");
     elements.iphoneTemplate.innerHTML = buildInstructionMarkup("iphone", parsed);
     elements.androidTemplate.innerHTML = buildInstructionMarkup("android", parsed);
     renderLayoutState();

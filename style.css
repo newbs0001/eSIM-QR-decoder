@@ -363,6 +363,10 @@ h3 {
   gap: 1rem;
 }
 
+.results-panel > .panel-body {
+  padding-top: 1rem;
+}
+
 .results-toolbar {
   display: flex;
   justify-content: flex-start;
