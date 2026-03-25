@@ -275,12 +275,17 @@
     `;
   }
 
-  function buildInstallLink(rawText, parsed) {
+  function buildInstallLinks(rawText, parsed) {
     if (!rawText || !parsed || !parsed.isLpa) {
-      return "";
+      return null;
     }
 
-    return "https://esimsetup.apple.com/esim_qrcode_provisioning?carddata=" + encodeURIComponent(rawText);
+    const encodedCardData = encodeURIComponent(rawText);
+
+    return {
+      iphone: "https://esimsetup.apple.com/esim_qrcode_provisioning?carddata=" + encodedCardData,
+      android: "https://esimsetup.android.com/esim_qrcode_provisioning?carddata=" + encodedCardData
+    };
   }
 
   function fieldCard(label, value, copyLabel, options) {
@@ -412,8 +417,24 @@
     `;
   }
 
-  function buildInstallLinkCard(installLink) {
-    const encodedLink = encodeURIComponent(installLink);
+  function buildInstallLinkRow(label, linkValue) {
+    const encodedLink = encodeURIComponent(linkValue);
+
+    return `
+      <div class="result-card result-card-standard result-card-link">
+        <p class="result-label result-card-label">${escapeHtml(label)} <span class="beta-label">BETA</span></p>
+        <pre class="result-code result-card-code">${escapeHtml(linkValue)}</pre>
+        <button class="copy-button icon-copy-button result-card-copy" type="button" aria-label="${escapeHtml(label)}" title="Kopier" data-copy="${encodedLink}" data-copy-label="${escapeHtml(label)}">
+          ${copyIconMarkup()}
+        </button>
+      </div>
+    `;
+  }
+
+  function buildInstallLinkCard(installLinks) {
+    if (!installLinks) {
+      return "";
+    }
 
     return `
       <details class="result-dropdown">
@@ -422,14 +443,9 @@
           <span class="guidance-chevron" aria-hidden="true"></span>
         </summary>
         <div class="result-dropdown-body">
-          <div class="result-card result-card-standard result-card-link">
-            <p class="result-label result-card-label">Installasjonslenke</p>
-            <pre class="result-code result-card-code">${escapeHtml(installLink)}</pre>
-            <button class="copy-button icon-copy-button result-card-copy" type="button" aria-label="Installasjonslenke" title="Kopier" data-copy="${encodedLink}" data-copy-label="Installasjonslenke">
-              ${copyIconMarkup()}
-            </button>
-          </div>
-          <p class="result-inline-note result-inline-warning">BETA: Denne funksjonen støttes foreløpig bare på enkelte iOS-enheter. Android er ikke støttet ennå. For at lenken skal fungere, må den sendes på en bestemt måte. Bruk manuell inntasting inntil videre.</p>
+          ${buildInstallLinkRow("iPhone-installasjonslenke", installLinks.iphone)}
+          ${buildInstallLinkRow("Android-installasjonslenke", installLinks.android)}
+          <p class="result-inline-note result-inline-warning">BETA: Disse lenkene er under utprøving. iPhone-lenken støttes foreløpig bare på enkelte iOS-enheter. Android-lenken kan legges ved for testing, men støtte og oppførsel vil variere mellom enheter. Bruk manuell inntasting inntil videre.</p>
         </div>
       </details>
     `;
@@ -462,8 +478,8 @@
           return fieldCard(text.extras + " " + (index + 1), extra, text.extras + " " + (index + 1));
         }).join("")
       : "";
-    const installLink = buildInstallLink(rawText, parsed);
-    const installLinkMarkup = installLink ? buildInstallLinkCard(installLink) : "";
+    const installLinks = buildInstallLinks(rawText, parsed);
+    const installLinkMarkup = installLinks ? buildInstallLinkCard(installLinks) : "";
 
     const priorityMarkup = [
       priorityFieldCard(text.smdp, parsed ? parsed.smdpAddress : "", text.smdp, "Blank"),
