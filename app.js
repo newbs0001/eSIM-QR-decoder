@@ -280,7 +280,7 @@
       return "";
     }
 
-    return rawText.replace(/^LPA:/i, "lpa:");
+    return "https://esimsetup.apple.com/esim_qrcode_provisioning?carddata=" + encodeURIComponent(rawText);
   }
 
   function fieldCard(label, value, copyLabel, options) {
@@ -418,7 +418,7 @@
     return `
       <details class="result-dropdown">
         <summary class="result-dropdown-summary">
-          <span>Installasjonslenke</span>
+          <span class="result-dropdown-title">Installasjonslenke <span class="beta-label">BETA</span></span>
           <span class="guidance-chevron" aria-hidden="true"></span>
         </summary>
         <div class="result-dropdown-body">
@@ -429,7 +429,7 @@
               ${copyIconMarkup()}
             </button>
           </div>
-          <p class="result-inline-note result-inline-warning">Denne funksjonen fungerer kun på iOS, og bare på enkelte enheter. For at lenken skal fungere, må den sendes på en bestemt måte. Bruk manuell inntasting inntil videre.</p>
+          <p class="result-inline-note result-inline-warning">BETA: Denne funksjonen støttes foreløpig bare på enkelte iOS-enheter. Android er ikke støttet ennå. For at lenken skal fungere, må den sendes på en bestemt måte. Bruk manuell inntasting inntil videre.</p>
         </div>
       </details>
     `;

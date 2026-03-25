@@ -457,6 +457,19 @@ h3 {
   font-weight: 700;
 }
 
+.result-dropdown-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.beta-label {
+  color: var(--error);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
 .result-dropdown-summary::-webkit-details-marker {
   display: none;
 }
