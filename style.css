@@ -352,6 +352,7 @@ h3 {
   height: 19px;
   fill: currentColor;
   display: block;
+  pointer-events: none;
 }
 
 .copy-button.is-copied {

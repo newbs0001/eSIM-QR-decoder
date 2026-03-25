@@ -773,16 +773,21 @@
       return;
     }
 
-    if (!(target instanceof HTMLButtonElement) || !target.dataset.copy) {
+    if (!(target instanceof Element)) {
       return;
     }
 
-    const value = decodeURIComponent(target.dataset.copy);
+    const copyButton = target.closest("button[data-copy]");
+    if (!(copyButton instanceof HTMLButtonElement)) {
+      return;
+    }
+
+    const value = decodeURIComponent(copyButton.dataset.copy || "");
 
     copyToClipboard(value)
       .then(function () {
-        animateCopyButton(target);
-        setStatus("success", (target.dataset.copyLabel || "Verdi") + " ble kopiert til utklippstavlen.");
+        animateCopyButton(copyButton);
+        setStatus("success", (copyButton.dataset.copyLabel || "Verdi") + " ble kopiert til utklippstavlen.");
       })
       .catch(function () {
         setStatus("error", "Tilgang til utklippstavlen ble blokkert av nettleseren.");
