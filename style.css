@@ -526,10 +526,21 @@ h3 {
 }
 
 .beta-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.18rem 0.62rem;
+  border-radius: 999px;
+  border: 1px solid #d5d5d5;
+  background: linear-gradient(180deg, #f2f2f2 0%, #e6e6e6 100%);
+  box-shadow: none;
   color: #111111;
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  text-transform: uppercase;
+  vertical-align: middle;
 }
 
 .result-dropdown-summary::-webkit-details-marker {
