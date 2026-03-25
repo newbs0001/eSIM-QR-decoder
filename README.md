@@ -169,13 +169,4 @@ Verktøyet er laget som et internt støtteverktøy for ansatte eller supportpers
 - kontrollere at en QR-kode faktisk inneholder forventet LPA-innhold
 - bruke installasjonslenker der dette er aktuelt
 
-## Status
-
-Prosjektet er i aktiv bruk og videreutvikles fortløpende. UI, ordlyd og arbeidsflyt er optimalisert for enkel intern bruk framfor generisk sluttbrukerdesign.
-
 ## Lisens og eierskap
-
-Applikasjonen er open source, men er også tydelig merket som utviklet for Johnsen IT.
-
-- Copyright: Johnsen IT
-- Utviklet av Michael Johnsen
