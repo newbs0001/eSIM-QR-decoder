@@ -35,7 +35,7 @@
       <section class="content">
         <section id="landing-section" class="landing-layout">
           <section class="privacy-card">
-            <div class="panel-titlebar">
+            <div class="panel-titlebar privacy-titlebar">
               <h2>Sikkerhet og personvern</h2>
             </div>
             <div class="panel-body compact-body">

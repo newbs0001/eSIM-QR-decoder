@@ -173,6 +173,15 @@ h3 {
   border-bottom: 1px solid #8f7600;
 }
 
+.privacy-titlebar {
+  background: #d98aa8;
+  border-bottom-color: #a45b77;
+}
+
+.privacy-titlebar h2 {
+  color: #fff5f8;
+}
+
 .panel-titlebar h2 {
   color: #f7f0d4;
   font-size: 0.98rem;
