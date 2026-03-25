@@ -52,7 +52,7 @@
             </div>
             <div class="panel-body intake-inner">
               <div class="dropzone-copy">
-                <h2 class="dropzone-title">Slipp eSIM-QR-koden her</h2>
+                <h2 class="dropzone-title">Slipp eSIM-QR her</h2>
                 <p class="dropzone-subtitle">Dra inn et bilde, lim inn fra utklippstavlen eller velg en fil.</p>
               </div>
 
@@ -66,10 +66,11 @@
             </div>
           </section>
 
-          <section class="panel manual-panel">
-            <div class="panel-titlebar">
+          <details class="panel manual-panel">
+            <summary class="panel-titlebar guidance-summary">
               <h2>Manuell inntasting</h2>
-            </div>
+              <span class="guidance-chevron" aria-hidden="true"></span>
+            </summary>
             <div class="panel-body">
               <div class="panel-header">
                 <p>Lim inn LPA-strengen direkte hvis du ikke bruker et QR-bilde.</p>
@@ -88,7 +89,7 @@
                 <button id="manual-submit" class="secondary-button" type="button">Vis resultat</button>
               </div>
             </div>
-          </section>
+          </details>
         </section>
 
         <section id="results-view" class="results-view is-hidden">

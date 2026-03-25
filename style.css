@@ -195,7 +195,7 @@ h3 {
 
 .landing-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1.55fr) minmax(290px, 0.9fr);
+  grid-template-columns: 1fr;
   align-items: start;
   gap: 1rem;
 }
@@ -213,14 +213,21 @@ h3 {
   background: #222629;
 }
 
+.intake-panel > .panel-body {
+  min-height: calc(410px - 56px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .intake-inner {
-  min-height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
   gap: 1rem;
+  margin: 0 auto;
 }
 
 .dropzone-copy {
@@ -307,7 +314,11 @@ h3 {
 }
 
 .manual-panel {
-  min-height: 410px;
+  min-height: 0;
+}
+
+.manual-panel > .panel-body {
+  padding-top: 1rem;
 }
 
 .field-label {
@@ -693,6 +704,10 @@ code {
 
   .intake-panel,
   .manual-panel {
+    min-height: 0;
+  }
+
+  .intake-panel > .panel-body {
     min-height: 0;
   }
 
