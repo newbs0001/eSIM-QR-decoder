@@ -498,6 +498,23 @@ h3 {
   color: var(--error);
 }
 
+.result-link-label {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.45rem;
+}
+
+.result-link-platform {
+  font-weight: 800;
+}
+
+.result-link-version {
+  color: var(--text-strong);
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
 .result-card-actions {
   grid-area: copy;
   display: grid;

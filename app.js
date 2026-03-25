@@ -417,14 +417,17 @@
     `;
   }
 
-  function buildInstallLinkRow(label, linkValue) {
+  function buildInstallLinkRow(platformLabel, versionLabel, linkValue) {
     const encodedLink = encodeURIComponent(linkValue);
 
     return `
       <div class="result-card result-card-standard result-card-link">
-        <p class="result-label result-card-label">${escapeHtml(label)} <span class="beta-label">BETA</span></p>
+        <p class="result-label result-card-label result-link-label">
+          <span class="result-link-platform">${escapeHtml(platformLabel)}</span>
+          <span class="result-link-version">${escapeHtml(versionLabel)}</span>
+        </p>
         <pre class="result-code result-card-code">${escapeHtml(linkValue)}</pre>
-        <button class="copy-button icon-copy-button result-card-copy" type="button" aria-label="${escapeHtml(label)}" title="Kopier" data-copy="${encodedLink}" data-copy-label="${escapeHtml(label)}">
+        <button class="copy-button icon-copy-button result-card-copy" type="button" aria-label="${escapeHtml(platformLabel + " " + versionLabel)}" title="Kopier" data-copy="${encodedLink}" data-copy-label="${escapeHtml(platformLabel + " " + versionLabel)}">
           ${copyIconMarkup()}
         </button>
       </div>
@@ -443,8 +446,8 @@
           <span class="guidance-chevron" aria-hidden="true"></span>
         </summary>
         <div class="result-dropdown-body">
-          ${buildInstallLinkRow("iPhone 17.4+", installLinks.iphone)}
-          ${buildInstallLinkRow("Android 10+", installLinks.android)}
+          ${buildInstallLinkRow("iOS", "17.4+", installLinks.iphone)}
+          ${buildInstallLinkRow("Android", "10+", installLinks.android)}
           <p class="result-inline-note result-inline-warning">BETA: Disse lenkene er under utprøving og fungerer bare på enkelte enheter. Støtte og oppførsel kan variere, så bruk manuell inntasting inntil videre.</p>
         </div>
       </details>
