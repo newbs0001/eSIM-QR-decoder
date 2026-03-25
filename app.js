@@ -26,8 +26,8 @@
       <header class="masthead">
         <div class="masthead-inner">
           <div class="masthead-brand">
-            <h1>eSIM QR-dekoder</h1>
-            <p class="header-subtitle">Dekod eSIM-QR-koder lokalt i nettleseren, uten opplasting eller lagring.</p>
+            <h1>eSIM Verktøy</h1>
+            <p class="header-subtitle">Dekod eSIM-QR-koder og hent ut manuelle verdier lokalt i nettleseren, uten opplasting eller lagring.</p>
           </div>
         </div>
       </header>
