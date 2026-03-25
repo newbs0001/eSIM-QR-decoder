@@ -33,7 +33,7 @@
             <h1>eSIM Verktøy</h1>
             <p class="header-subtitle">Dekod eSIM-QR-koder og hent ut manuelle verdier lokalt i nettleseren, uten opplasting eller lagring.</p>
           </div>
-          <p class="header-version">Versjon 1.0.5</p>
+          <p class="header-version">Versjon 1.0.0</p>
         </div>
       </header>
 
@@ -52,8 +52,9 @@
           </section>
 
           <section id="intake-panel" class="panel intake-panel">
-            <div class="panel-titlebar">
+            <div class="panel-titlebar intake-titlebar">
               <h2>eSIM-QR</h2>
+              <button id="demo-trigger" class="demo-header-trigger" type="button">Demo QR</button>
             </div>
             <div class="panel-body intake-inner">
               <div class="dropzone-copy">
@@ -163,7 +164,7 @@
       <footer class="site-footer">
         <div class="site-footer-inner">
           <p>&copy; 2026 Johnsen IT. Alle rettigheter forbeholdt.</p>
-          <button id="demo-trigger" class="footer-secret-trigger" type="button">Utviklet av Michael Johnsen</button>
+          <p>Utviklet av Michael Johnsen</p>
         </div>
       </footer>
 
@@ -172,7 +173,7 @@
         <div class="demo-modal-card" role="dialog" aria-modal="true" aria-labelledby="demo-modal-title">
           <div class="demo-modal-header">
             <div>
-              <p class="result-label">Skjult demo</p>
+              <p class="result-label">Demo QR</p>
               <h2 id="demo-modal-title">Eksempel-QR for rask test</h2>
             </div>
             <button id="demo-close" class="secondary-button demo-close-button" type="button">Lukk</button>

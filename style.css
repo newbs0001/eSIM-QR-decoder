@@ -180,6 +180,13 @@ h3 {
   border-bottom: 1px solid #8f7600;
 }
 
+.intake-titlebar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
 .privacy-titlebar {
   background: #EE4B2B;
   border-bottom-color: #b8381e;
@@ -197,6 +204,26 @@ h3 {
   color: #f7f0d4;
   font-size: 0.98rem;
   font-weight: 700;
+}
+
+.demo-header-trigger {
+  border: 0;
+  background: transparent;
+  color: #f7f0d4;
+  padding: 0;
+  min-height: 0;
+  font-size: 0.86rem;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.demo-header-trigger:hover,
+.demo-header-trigger:focus-visible {
+  background: transparent;
+  border-color: transparent;
+  color: #ffffff;
+  text-decoration: underline;
 }
 
 .panel-body,
@@ -689,22 +716,6 @@ h3 {
   font-size: 0.72rem;
   display: grid;
   gap: 0.08rem;
-}
-
-.footer-secret-trigger {
-  border: 0;
-  background: transparent;
-  color: inherit;
-  padding: 0;
-  min-height: 0;
-  font-size: inherit;
-  font-weight: inherit;
-  cursor: default;
-}
-
-.footer-secret-trigger:hover {
-  background: transparent;
-  border-color: transparent;
 }
 
 .demo-modal {
