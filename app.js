@@ -443,9 +443,9 @@
           <span class="guidance-chevron" aria-hidden="true"></span>
         </summary>
         <div class="result-dropdown-body">
-          ${buildInstallLinkRow("iPhone-installasjonslenke", installLinks.iphone)}
-          ${buildInstallLinkRow("Android-installasjonslenke", installLinks.android)}
-          <p class="result-inline-note result-inline-warning">BETA: Disse lenkene er under utprøving. iPhone-lenken fungerer bare på enkelte enheter med iOS 17.4 eller nyere. Android-lenken fungerer bare på enkelte enheter med Android 10 eller nyere. Støtte og oppførsel kan variere, så bruk manuell inntasting inntil videre.</p>
+          ${buildInstallLinkRow("iPhone 17.4+", installLinks.iphone)}
+          ${buildInstallLinkRow("Android 10+", installLinks.android)}
+          <p class="result-inline-note result-inline-warning">BETA: Disse lenkene er under utprøving og fungerer bare på enkelte enheter. Støtte og oppførsel kan variere, så bruk manuell inntasting inntil videre.</p>
         </div>
       </details>
     `;
