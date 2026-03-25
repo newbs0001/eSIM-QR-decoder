@@ -21,6 +21,10 @@
     }
   };
 
+  const demo = {
+    qrImage: "./assets/demo-qr.png"
+  };
+
   app.innerHTML = `
     <main class="app-shell">
       <header class="masthead">
@@ -29,6 +33,7 @@
             <h1>eSIM Verktøy</h1>
             <p class="header-subtitle">Dekod eSIM-QR-koder og hent ut manuelle verdier lokalt i nettleseren, uten opplasting eller lagring.</p>
           </div>
+          <p class="header-version">Versjon 1.0.5</p>
         </div>
       </header>
 
@@ -158,9 +163,26 @@
       <footer class="site-footer">
         <div class="site-footer-inner">
           <p>&copy; 2026 Johnsen IT. Alle rettigheter forbeholdt.</p>
-          <p>Utviklet av Michael Johnsen</p>
+          <button id="demo-trigger" class="footer-secret-trigger" type="button">Utviklet av Michael Johnsen</button>
         </div>
       </footer>
+
+      <div id="demo-modal" class="demo-modal is-hidden" aria-hidden="true">
+        <div class="demo-modal-backdrop" data-demo-close="true"></div>
+        <div class="demo-modal-card" role="dialog" aria-modal="true" aria-labelledby="demo-modal-title">
+          <div class="demo-modal-header">
+            <div>
+              <p class="result-label">Skjult demo</p>
+              <h2 id="demo-modal-title">Eksempel-QR for rask test</h2>
+            </div>
+            <button id="demo-close" class="secondary-button demo-close-button" type="button">Lukk</button>
+          </div>
+          <div class="demo-modal-body">
+            <img class="demo-qr-image" src="${demo.qrImage}" alt="Eksempel på eSIM-QR for demo" />
+            <p class="demo-helper">Ta skjermklipp av denne QR-koden og lim den inn på siden for en rask demo.</p>
+          </div>
+        </div>
+      </div>
     </main>
   `;
 
@@ -170,6 +192,9 @@
     manualSubmit: document.querySelector("#manual-submit"),
     pasteButton: document.querySelector("#paste-button"),
     backButton: document.querySelector("#back-button"),
+    demoTrigger: document.querySelector("#demo-trigger"),
+    demoModal: document.querySelector("#demo-modal"),
+    demoClose: document.querySelector("#demo-close"),
     intakePanel: document.querySelector("#intake-panel"),
     status: document.querySelector("#status"),
     landingSection: document.querySelector("#landing-section"),
@@ -182,6 +207,16 @@
     iphoneTemplate: document.querySelector("#iphone-template"),
     androidTemplate: document.querySelector("#android-template")
   };
+
+  function closeDemoModal() {
+    elements.demoModal.classList.add("is-hidden");
+    elements.demoModal.setAttribute("aria-hidden", "true");
+  }
+
+  function openDemoModal() {
+    elements.demoModal.classList.remove("is-hidden");
+    elements.demoModal.setAttribute("aria-hidden", "false");
+  }
 
   function escapeHtml(value) {
     return value
@@ -664,6 +699,14 @@
     setStatus("idle", text.idle);
   });
 
+  elements.demoTrigger.addEventListener("click", function () {
+    openDemoModal();
+  });
+
+  elements.demoClose.addEventListener("click", function () {
+    closeDemoModal();
+  });
+
   elements.pasteButton.addEventListener("click", function () {
     readClipboardImage()
       .then(function (blob) {
@@ -724,6 +767,11 @@
 
   app.addEventListener("click", function (event) {
     const target = event.target;
+    if (target instanceof HTMLElement && target.dataset.demoClose === "true") {
+      closeDemoModal();
+      return;
+    }
+
     if (!(target instanceof HTMLButtonElement) || !target.dataset.copy) {
       return;
     }
@@ -738,6 +786,12 @@
       .catch(function () {
         setStatus("error", "Tilgang til utklippstavlen ble blokkert av nettleseren.");
       });
+  });
+
+  window.addEventListener("keydown", function (event) {
+    if (event.key === "Escape" && !elements.demoModal.classList.contains("is-hidden")) {
+      closeDemoModal();
+    }
   });
 
   renderResults();
